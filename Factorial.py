@@ -1,11 +1,11 @@
-from flask import Flask, request
+from Flask import Flask, request
 
 app = Flask(__name__)
 
 @app.route("/factorial", methods=["POST"])
 def endpoint():
     js = request.get_json()
-    argument = js.get ("argument")
+    argument = js.get (" argument ")
     if argument != None :
         result = calculate(argument)
         return {"result": result} ,200 # OK
@@ -13,11 +13,10 @@ def endpoint():
         return "" ,400 # Bad Request
 
 def calculate ( n ):
-    total = 1
-    for x in range(1, n+1):
-        total *= x
-    return total
+    if n <= 0:
+        return 1
+    else :
+        return n * calculate (n -1)
 
-
-if __name__ == "__main__":  
-    app.run(host="localhost", port =3000)
+if __name__ == " __main__ ":
+    app.run (host="localhost", port =3000)
